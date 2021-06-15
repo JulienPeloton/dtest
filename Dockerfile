@@ -4,8 +4,8 @@ ENV REFRESHED_AT 2021-06-08
 
 # Add repo
 WORKDIR /home/jovyan/work
-#ADD . .
-COPY --chown=jovyan:users . .
+ADD . .
+#COPY --chown=jovyan:users . .
 # Append Spark specific modules (coverage)
 ENV PYTHONPATH=$PYTHONPATH:${SPARK_HOME}/python/test_coverage
 ENV PYTHONPATH=$PYTHONPATH:${SPARK_HOME}/python:${SPARK_HOME}/python/lib/py4j-0.10.9-src.zip
