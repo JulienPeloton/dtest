@@ -7,8 +7,6 @@ on:
   pull_request:
 
 jobs:
-  install-checks:
-    runs-on: ubuntu-latest
   test-suite:
     needs: install-checks
     runs-on: ubuntu-latest
