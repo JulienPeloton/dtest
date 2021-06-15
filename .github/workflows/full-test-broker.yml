@@ -8,7 +8,6 @@ on:
 
 jobs:
   test-suite:
-    needs: install-checks
     runs-on: ubuntu-latest
     strategy:
       matrix:
