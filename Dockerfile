@@ -22,12 +22,10 @@ RUN echo "spark.eventLog.enabled true" >> $SPARK_HOME/conf/spark-defaults.conf \
   && echo "spark.eventLog.dir file:///tmp/spark-events" >> $SPARK_HOME/conf/spark-defaults.conf \
   && echo "spark.sql.shuffle.partitions 10" >> $SPARK_HOME/conf/spark-defaults.conf \
   && echo "SPARK_LOG_DIR=/tmp/spark-events" >> $SPARK_HOME/conf/spark-env.sh 
-USER jovyan:users
+USER jovyan
 
 # Add dependencies
 RUN pip install -r requirements.txt 
-#  && fix-permissions "${CONDA_DIR}" \
-#  && fix-permissions "/home/jovyan"
 
 RUN python config_rise.py \
   && mkdir /tmp/spark-events
