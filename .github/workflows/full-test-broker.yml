@@ -47,4 +47,5 @@ jobs:
         echo "PYTHONPATH=${SPARKLIB}" >> $GITHUB_ENV
     - name: Run test suites
       run: |
+        sudo chown -R 1000 $PWD
         source ./build_image.sh
