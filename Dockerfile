@@ -25,7 +25,10 @@ RUN echo "spark.eventLog.enabled true" >> $SPARK_HOME/conf/spark-defaults.conf \
 USER jovyan
 
 # Add dependencies
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt \
+  && fix-permissions "${CONDA_DIR}" \
+  && fix-permissions "/home/${NB_USER}"
+
 RUN python config_rise.py \
   && mkdir /tmp/spark-events
 
