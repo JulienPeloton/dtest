@@ -27,7 +27,7 @@ USER jovyan:users
 # Add dependencies
 RUN pip install -r requirements.txt \
   && fix-permissions "${CONDA_DIR}" \
-  && fix-permissions "/home/${NB_UID}"
+  && fix-permissions "/home/jovyan"
 
 RUN python config_rise.py \
   && mkdir /tmp/spark-events
