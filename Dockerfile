@@ -4,8 +4,8 @@ ENV REFRESHED_AT 2021-06-08
 
 # Add repo
 WORKDIR /home/jovyan/work
-ADD . .
-
+#ADD . .
+COPY --chown=jovyan . .
 # Append Spark specific modules (coverage)
 ENV PYTHONPATH=$PYTHONPATH:${SPARK_HOME}/python/test_coverage
 ENV PYTHONPATH=$PYTHONPATH:${SPARK_HOME}/python:${SPARK_HOME}/python/lib/py4j-0.10.9-src.zip
@@ -22,12 +22,12 @@ RUN echo "spark.eventLog.enabled true" >> $SPARK_HOME/conf/spark-defaults.conf \
   && echo "spark.eventLog.dir file:///tmp/spark-events" >> $SPARK_HOME/conf/spark-defaults.conf \
   && echo "spark.sql.shuffle.partitions 10" >> $SPARK_HOME/conf/spark-defaults.conf \
   && echo "SPARK_LOG_DIR=/tmp/spark-events" >> $SPARK_HOME/conf/spark-env.sh 
-USER 1002
+USER ${NB_UID}
 
 # Add dependencies
 RUN pip install -r requirements.txt \
   && fix-permissions "${CONDA_DIR}" \
-  && fix-permissions "/home/1002"
+  && fix-permissions "/home/${NB_UID}"
 
 RUN python config_rise.py \
   && mkdir /tmp/spark-events
