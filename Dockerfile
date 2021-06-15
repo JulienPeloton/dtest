@@ -27,7 +27,7 @@ USER 1002
 # Add dependencies
 RUN pip install -r requirements.txt \
   && fix-permissions "${CONDA_DIR}" \
-  && fix-permissions "/home/${NB_USER}"
+  && fix-permissions "/home/1002"
 
 RUN python config_rise.py \
   && mkdir /tmp/spark-events
